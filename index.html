@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Line Drive Tax</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="LDT-favicon.svg" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/theme.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="#values">Values</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+    <main>
+      <a href="#" class="logo">
+        <img src="./LDT.svg" alt="Line Drive Tax Logo" />
+      </a>
+      <section class="hero">
+        <h1 class="color-primary">
+          You Play Hard.<br />
+          We Handle the Numbers<span class="color-primary">.</span>
+        </h1>
+        <p class="tagline">Full-service tax for professional athletes</p>
+        <button>Connect</button>
+      </section>
+      <section id="values" class="values">
+        <h2>Values</h2>
+        <p>Precision. Dedication. Transparency.</p>
+      </section>
+      <section id="expertise" class="expertise">
+        <h2>Expertise</h2>
+        <p>
+          With years of experience, we specialize in managing taxes for athletes
+          to help them focus on their careers.
+        </p>
+      </section>
+      <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <div class="form">
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="email" name="email" placeholder="Your email" required />
+          <textarea
+            name="message"
+            placeholder="Your message"
+            required
+          ></textarea>
+          <button type="submit">Send</button>
+        </form>
+        </div>
+
+        <p>Get in touch to learn how we can assist you.</p>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2024 Line Drive Tax</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

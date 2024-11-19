@@ -1,0 +1,41 @@
+:root {
+  --color-primary: #ff5f05;
+  --color-secondary: #c4fcf0;
+  --color-tertiary: #1c5e90;
+  --color-neutral: #bda79d;
+  --color-bg: #89543c;
+  --color-white: #ffffff;
+
+  --font-heading: "DM Serif Display", serif;
+  --font-body: "DM Mono", monospace;
+
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+
+  --radius-pill: 999px;
+
+  --font-size-base: 1rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 2rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 5vw;
+
+  --button-min-width: 250px;
+}
+
+body,
+h1,
+h2,
+p {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-white);
+  scroll-behavior: smooth;
+}
