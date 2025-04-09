@@ -1,5 +1,7 @@
 "use client";
 
+import { useSectionInView } from "@/lib/useSectionInView";
+
 export interface Service {
   title: string;
   description: string;
@@ -11,6 +13,7 @@ interface ServicesSectionProps {
   paragraph1: string;
   paragraph2: string;
   services: Service[];
+  onVisible?: () => void;
 }
 
 export const ServicesSection = ({
@@ -19,10 +22,13 @@ export const ServicesSection = ({
   paragraph1,
   paragraph2,
   services,
+  onVisible,
 }: ServicesSectionProps) => {
+  const ref = useSectionInView(onVisible);
+
   return (
-    <section id="services" className="py-20 bg-gray-100">
-      <div className="container mx-auto text-center">
+    <section ref={ref} id="services" className="flex flex-col items-center justify-center py-20 bg-gray-100 h-[100vh]">
+      <div className="container mx-auto">
         <h2 className="text-3xl font-bold mb-4">{title}</h2>
         <p className="text-lg text-gray-700 mb-4">{description}</p>
         <p className="text-md text-gray-600 mb-2">{paragraph1}</p>

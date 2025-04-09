@@ -1,5 +1,6 @@
 "use client";
 
+import { useSectionInView } from "@/lib/useSectionInView";
 import { motion } from "framer-motion";
 
 export interface AboutSectionProps {
@@ -8,6 +9,7 @@ export interface AboutSectionProps {
   paragraph1: string;
   heading2: string;
   paragraph2: string;
+  onVisible?: () => void;
 }
 
 export const AboutSection: React.FC<AboutSectionProps> = ({
@@ -16,11 +18,14 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
   paragraph1,
   heading2,
   paragraph2,
+  onVisible,
 }) => {
+  const ref = useSectionInView(onVisible);
   return (
     <section
+      ref={ref}
       id="about"
-      className="min-h-screen flex flex-col items-center justify-center p-8"
+      className="min-h-screen flex flex-col items-center justify-center p-8 h-[100vh]"
     >
       <motion.div
         initial={{ opacity: 0, y: 50 }}

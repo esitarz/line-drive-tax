@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { toast } from "sonner";
+import { useSectionInView } from "@/lib/useSectionInView";
 import { Input } from "@/shadcn/ui/input";
 import { Textarea } from "@/shadcn/ui/textarea";
+import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { toast } from "sonner";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeoapyqv";
 
@@ -14,6 +15,7 @@ export interface ContactSectionProps {
   officeAddress?: string;
   phoneNumber: string;
   emailAddress: string;
+  onVisible?: () => void;
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({
@@ -22,11 +24,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   officeAddress,
   phoneNumber,
   emailAddress,
+  onVisible,
 }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const ref = useSectionInView(onVisible);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -65,6 +70,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
   return (
     <section
+      ref={ref}
       id="contact"
       className="min-h-screen flex flex-col items-center justify-center p-8 bg-gray-50 dark:bg-gray-900"
     >
