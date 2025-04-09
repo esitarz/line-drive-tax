@@ -2,40 +2,26 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import { components } from "./MDXComponents";
 import { toast } from "sonner";
 import { Input } from "@/shadcn/ui/input";
 import { Textarea } from "@/shadcn/ui/textarea";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeoapyqv";
 
-export interface ContactSectionFrontmatter {
+export interface ContactSectionProps {
   title: string;
   submitButtonText: string;
-  officeAddress: string;
+  officeAddress?: string;
   phoneNumber: string;
   emailAddress: string;
-  [key: string]:
-    | string
-    | number
-    | boolean
-    | string[]
-    | number[]
-    | boolean[]
-    | object
-    | null
-    | undefined;
-}
-
-export interface ContactSectionProps {
-  frontmatter: ContactSectionFrontmatter;
-  mdxSource: MDXRemoteSerializeResult;
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({
-  frontmatter,
-  mdxSource,
+  title,
+  submitButtonText,
+  officeAddress,
+  phoneNumber,
+  emailAddress,
 }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -89,39 +75,33 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         viewport={{ once: false }}
         className="max-w-4xl w-full"
       >
-        <h2 className="text-4xl font-bold mb-8">{frontmatter.title}</h2>
+        <h2 className="text-4xl font-bold mb-8">{title}</h2>
 
         <div className="flex flex-col md:flex-row gap-8 mb-12">
-          {frontmatter.officeAddress && (
+          {officeAddress && (
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex-1">
               <h3 className="text-xl font-semibold mb-3">Address</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                {frontmatter.officeAddress}
+                {officeAddress}
               </p>
             </div>
           )}
-          {frontmatter.phoneNumber && (
+          {phoneNumber && (
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex-1">
               <h3 className="text-xl font-semibold mb-3">Phone</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                {frontmatter.phoneNumber}
-              </p>
+              <p className="text-gray-600 dark:text-gray-300">{phoneNumber}</p>
             </div>
           )}
-          {frontmatter.emailAddress && (
+          {emailAddress && (
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex-1">
               <h3 className="text-xl font-semibold mb-3">Email</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                {frontmatter.emailAddress}
-              </p>
+              <p className="text-gray-600 dark:text-gray-300">{emailAddress}</p>
             </div>
           )}
         </div>
 
         <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
-          <div className="prose dark:prose-invert max-w-none mb-6">
-            <MDXRemote {...mdxSource} components={components} />
-          </div>
+          <div className="prose dark:prose-invert max-w-none mb-6"></div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -179,7 +159,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               className="px-6 py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors disabled:opacity-50"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Sending..." : frontmatter.submitButtonText}
+              {isSubmitting ? "Sending..." : submitButtonText}
             </button>
           </form>
         </div>
