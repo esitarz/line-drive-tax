@@ -16,17 +16,18 @@ export interface AboutSectionFrontmatter {
     | boolean[]
     | object
     | null
-    | undefined; // Add this line
+    | undefined;
 }
 
 export interface AboutSectionProps {
-  about: {
-    frontmatter: AboutSectionFrontmatter;
-    mdxSource: MDXRemoteSerializeResult;
-  };
+  frontmatter: AboutSectionFrontmatter;
+  mdxSource: MDXRemoteSerializeResult;
 }
 
-export const AboutSection: React.FC<AboutSectionProps> = ({ about }) => {
+export const AboutSection: React.FC<AboutSectionProps> = ({
+  frontmatter,
+  mdxSource,
+}) => {
   return (
     <section
       id="about"
@@ -40,15 +41,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ about }) => {
         className="max-w-4xl"
       >
         <h2 className="text-4xl font-bold mb-8 text-center">
-          {about.frontmatter.title}
+          {frontmatter.title}
         </h2>
         <div className="flex flex-col md:flex-row gap-8 items-center">
           <div className="flex-1">
             <h3 className="text-2xl font-semibold mb-4">
-              {about.frontmatter.experienceTitle}
+              {frontmatter.experienceTitle}
             </h3>
             <div className="prose dark:prose-invert max-w-none">
-              <MDXRemote {...about.mdxSource} components={components} />
+              <MDXRemote {...mdxSource} components={components} />
             </div>
           </div>
           <div className="flex-1 flex justify-center">

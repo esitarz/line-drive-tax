@@ -1,15 +1,18 @@
-
 import withMDX from "@next/mdx";
 
-const nextConfig = {
-  pageExtensions: ["ts", "tsx", "mdx"],
-  reactStrictMode: true,
-};
-
-export default withMDX({
+const withMDXConfig = withMDX({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [],
     rehypePlugins: [],
+    providerImportSource: "@mdx-js/react",
   },
-})(nextConfig);
+});
+
+const nextConfig = {
+  reactStrictMode: true,
+  pageExtensions: ["ts", "tsx", "mdx"],
+  output: "export" as const,
+};
+
+export default withMDXConfig(nextConfig);

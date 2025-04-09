@@ -1,32 +1,27 @@
-// components/HomeSection.tsx
-import { components } from "./MDXComponents";
-import { MDXComponents } from "mdx/types";
+"use client";
+
+
+import { MDXProvider } from "@mdx-js/react";
 import { motion } from "framer-motion";
-import { ComponentType } from "react";
+import { components } from "./MDXComponents";
 
 export interface HomeSectionFrontmatter {
   title: string;
   description: string;
   buttonText: string;
-  secondaryButtonText: string;
+  secondaryButtonText?: string;
 }
 
-export interface HomeSectionProps {
+interface HomeSectionProps {
   frontmatter: HomeSectionFrontmatter;
-  MDXContent: ComponentType<any>; // This comes from a direct MDX import
+  children: React.ReactNode;
 }
 
-export const HomeSection = ({
-  frontmatter,
-  MDXContent,
-}: HomeSectionProps) => {
-
-   const scrollToSection = (id: string) => {
-     const el = document.getElementById(id);
-     if (el) {
-       el.scrollIntoView({ behavior: "smooth", block: "start" });
-     }
-   };
+export const HomeSection = ({ frontmatter, children }: HomeSectionProps) => {
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <section
@@ -45,7 +40,7 @@ export const HomeSection = ({
           {frontmatter.description}
         </p>
         <div className="prose dark:prose-invert max-w-none">
-          <MDXContent components={components as MDXComponents} />
+          <MDXProvider components={components}>{children}</MDXProvider>
         </div>
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
@@ -58,16 +53,18 @@ export const HomeSection = ({
           >
             {frontmatter.buttonText}
           </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto"
-            href="#services"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection("services");
-            }}
-          >
-            {frontmatter.secondaryButtonText}
-          </a>
+          {frontmatter.secondaryButtonText && (
+            <a
+              className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto"
+              href="#services"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("services");
+              }}
+            >
+              {frontmatter.secondaryButtonText}
+            </a>
+          )}
         </div>
       </motion.div>
     </section>

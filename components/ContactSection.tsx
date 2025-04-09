@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { MDXRemote } from "next-mdx-remote";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { components } from "./MDXComponents";
 import { toast } from "sonner";
 import { Input } from "@/shadcn/ui/input";
@@ -29,13 +29,14 @@ export interface ContactSectionFrontmatter {
 }
 
 export interface ContactSectionProps {
-  contact: {
-    frontmatter: ContactSectionFrontmatter;
-    mdxSource: any;
-  };
+  frontmatter: ContactSectionFrontmatter;
+  mdxSource: MDXRemoteSerializeResult;
 }
 
-export const ContactSection: React.FC<ContactSectionProps> = ({ contact }) => {
+export const ContactSection: React.FC<ContactSectionProps> = ({
+  frontmatter,
+  mdxSource,
+}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -88,30 +89,30 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ contact }) => {
         viewport={{ once: false }}
         className="max-w-4xl w-full"
       >
-        <h2 className="text-4xl font-bold mb-8">{contact.frontmatter.title}</h2>
+        <h2 className="text-4xl font-bold mb-8">{frontmatter.title}</h2>
 
         <div className="flex flex-col md:flex-row gap-8 mb-12">
-          {contact.frontmatter.officeAddress && (
+          {frontmatter.officeAddress && (
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex-1">
               <h3 className="text-xl font-semibold mb-3">Address</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                {contact.frontmatter.officeAddress}
+                {frontmatter.officeAddress}
               </p>
             </div>
           )}
-          {contact.frontmatter.phoneNumber && (
+          {frontmatter.phoneNumber && (
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex-1">
               <h3 className="text-xl font-semibold mb-3">Phone</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                {contact.frontmatter.phoneNumber}
+                {frontmatter.phoneNumber}
               </p>
             </div>
           )}
-          {contact.frontmatter.emailAddress && (
+          {frontmatter.emailAddress && (
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex-1">
               <h3 className="text-xl font-semibold mb-3">Email</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                {contact.frontmatter.emailAddress}
+                {frontmatter.emailAddress}
               </p>
             </div>
           )}
@@ -119,7 +120,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ contact }) => {
 
         <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
           <div className="prose dark:prose-invert max-w-none mb-6">
-            <MDXRemote {...contact.mdxSource} components={components} />
+            <MDXRemote {...mdxSource} components={components} />
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -178,9 +179,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ contact }) => {
               className="px-6 py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors disabled:opacity-50"
               disabled={isSubmitting}
             >
-              {isSubmitting
-                ? "Sending..."
-                : contact.frontmatter.submitButtonText}
+              {isSubmitting ? "Sending..." : frontmatter.submitButtonText}
             </button>
           </form>
         </div>
