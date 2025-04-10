@@ -72,14 +72,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     <section
       ref={ref}
       id="contact"
-      className="min-h-[100vh] h-fit flex flex-col items-center justify-center p-8"
+      className="min-h-screen flex flex-col items-center justify-center p-8"
     >
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: false }}
-        className="max-w-4xl w-full"
+        className="max-w-4xl w-full mt-25 sm:mt-0"
       >
         <h2 className="text-5xl font-thin mb-8">{title}</h2>
 

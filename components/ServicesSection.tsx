@@ -30,9 +30,9 @@ export const ServicesSection = ({
     <section
       ref={ref}
       id="services"
-      className="flex flex-col items-center justify-center py-20 min-h-[100vh] h-fit"
+      className="flex flex-col items-center justify-center p-8 min-h-screen"
     >
-      <div className="container mx-auto">
+      <div className="container mx-auto mt-25 sm:mt-0">
         <h2 className="text-5xl font-thin mb-4">{title}</h2>
         <p className="text-xl text-muted-foreground mb-4">{description}</p>
         <p className="text-md mb-2">{paragraph1}</p>
