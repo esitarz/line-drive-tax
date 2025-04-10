@@ -23,7 +23,7 @@ export const HomeSection = ({ frontmatter, onVisible }: HomeSectionProps) => {
     <section
       id="home"
       ref={sectionRef}
-      className="min-h-screen h-[100vh] snap-start flex flex-col items-center justify-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]"
+      className="min-h-[100vh] h-fit snap-start flex flex-col items-center justify-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]"
     >
       <motion.div
         initial={{ opacity: 0, y: 50 }}

@@ -30,7 +30,7 @@ export const ServicesSection = ({
     <section
       ref={ref}
       id="services"
-      className="flex flex-col items-center justify-center py-20 h-[100vh]"
+      className="flex flex-col items-center justify-center py-20 min-h-[100vh] h-fit"
     >
       <div className="container mx-auto">
         <h2 className="text-5xl font-thin mb-4">{title}</h2>
@@ -43,7 +43,9 @@ export const ServicesSection = ({
               key={index}
               className="bg-card text-card-foreground p-6 rounded-md shadow-md"
             >
-              <h3 className="text-gray text-xl font-semibold mb-2">{service.title}</h3>
+              <h3 className="text-gray text-xl font-semibold mb-2">
+                {service.title}
+              </h3>
               <p>{service.description}</p>
             </div>
           ))}
