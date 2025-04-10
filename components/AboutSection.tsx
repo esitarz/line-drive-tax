@@ -25,14 +25,14 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
     <section
       ref={ref}
       id="about"
-      className="flex flex-col items-center justify-center p-8 min-h-[100vh]"
+      className="flex flex-col items-center justify-center p-8 min-h-screen"
     >
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: false }}
-        className="max-w-4xl"
+        className="max-w-4xl mt-25 sm:mt-0"
       >
         {title !== "" ? null : (
           <h1 className="text-5xl font-bold mb-4">{title}</h1>
@@ -50,7 +50,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           </div>
           <div className="flex-1 flex justify-center">
             {/* <div className="w-64 h-64 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center"> */}
-              <img src="/kdahl@2x.png" alt={"alt"} />
+            <img src="/kdahl@2x.png" alt={"alt"} />
             {/* </div> */}
           </div>
         </div>

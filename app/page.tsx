@@ -26,26 +26,26 @@ export default function Page() {
     <div className="relative">
       <TopMenu />
       <main className="snap-y snap-mandatory h-screen overflow-y-scroll scroll-smooth">
-        <section id="home" className="snap-start h-screen">
+        <section id="home" className="snap-start min-h-[100vh] h-fit">
           <HomeSection
             frontmatter={homeContent}
             {...homeContent}
             onVisible={makeVisibleHandler("home")}
           />
         </section>
-        <section id="services" className="snap-start h-screen">
+        <section id="services" className="snap-start min-h-[100vh] h-fit">
           <ServicesSection
             {...servicesContent}
             onVisible={makeVisibleHandler("services")}
           />
         </section>
-        <section id="about" className="snap-start h-screen">
+        <section id="about" className="snap-start min-h-[100vh] h-fit">
           <AboutSection
             {...aboutContent}
             onVisible={makeVisibleHandler("about")}
           />
         </section>
-        <section id="contact" className="snap-start h-screen">
+        <section id="contact" className="snap-start min-h-[100vh] h-fit">
           <ContactSection
             {...contactContent}
             onVisible={makeVisibleHandler("contact")}
