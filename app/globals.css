@@ -125,10 +125,16 @@
   --gray-800: oklch(0.3 0.035 65);
   --gray-900: oklch(0.2 0.025 65);
   --gray-950: oklch(0.15 0.015 65);
+
+  --font-geist-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --font-space-grotesk: Space Grotesk, --font-geist-sans;
 }
 
 .dark {
-  /* Dark mode - forest green base, not black */
   --background: oklch(0.2 0.02 150);
   --foreground: oklch(0.95 0.005 150);
   --card: oklch(0.22 0.025 150);
