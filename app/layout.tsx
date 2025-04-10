@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
-
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 
@@ -22,7 +21,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Line Drive Tax",
   description:
-    "Managing taxes for athletes to help them focus on their careers",
+    "Full service tax for professional athletes and business professionals",
+  openGraph: {
+    images: "/og-image.png",
+  },
 };
 
 export default function RootLayout({
