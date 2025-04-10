@@ -25,7 +25,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
     <section
       ref={ref}
       id="about"
-      className="min-h-screen flex flex-col items-center justify-center p-8 h-[100vh]"
+      className="flex flex-col items-center justify-center p-8 min-h-[100vh]"
     >
       <motion.div
         initial={{ opacity: 0, y: 50 }}

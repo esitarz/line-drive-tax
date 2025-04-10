@@ -72,7 +72,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     <section
       ref={ref}
       id="contact"
-      className="min-h-screen flex flex-col items-center justify-center p-8"
+      className="min-h-[100vh] h-fit flex flex-col items-center justify-center p-8"
     >
       <motion.div
         initial={{ opacity: 0, y: 50 }}
