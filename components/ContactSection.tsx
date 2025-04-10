@@ -72,7 +72,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     <section
       ref={ref}
       id="contact"
-      className="min-h-screen flex flex-col items-center justify-center p-8 bg-gray-50 dark:bg-gray-900"
+      className="min-h-screen flex flex-col items-center justify-center p-8"
     >
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -81,32 +81,36 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         viewport={{ once: false }}
         className="max-w-4xl w-full"
       >
-        <h2 className="text-4xl font-bold mb-8">{title}</h2>
+        <h2 className="text-5xl font-thin mb-8">{title}</h2>
 
         <div className="flex flex-col md:flex-row gap-8 mb-12">
           {officeAddress && (
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex-1">
+            <div className="bg-white dark:bg-card p-6 rounded-lg shadow-md flex-1">
               <h3 className="text-xl font-semibold mb-3">Address</h3>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-gray-600 dark:text-card-foreground/80">
                 {officeAddress}
               </p>
             </div>
           )}
           {phoneNumber && (
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex-1">
+            <div className="bg-white dark:bg-card p-6 rounded-lg shadow-md flex-1">
               <h3 className="text-xl font-semibold mb-3">Phone</h3>
-              <p className="text-gray-600 dark:text-gray-300">{phoneNumber}</p>
+              <p className="text-gray-600 dark:text-card-foreground/80">
+                {phoneNumber}
+              </p>
             </div>
           )}
           {emailAddress && (
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex-1">
+            <div className="bg-white dark:bg-card p-6 rounded-lg shadow-md flex-1">
               <h3 className="text-xl font-semibold mb-3">Email</h3>
-              <p className="text-gray-600 dark:text-gray-300">{emailAddress}</p>
+              <p className="text-gray-600 dark:text-card-foreground/80">
+                {emailAddress}
+              </p>
             </div>
           )}
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-card p-8 rounded-lg shadow-md">
           <div className="prose dark:prose-invert max-w-none mb-6"></div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -114,7 +118,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  className="block text-sm font-medium text-gray-700 dark:text-card-foreground mb-1"
                 >
                   Name
                 </label>
@@ -130,7 +134,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  className="block text-sm font-medium text-gray-700 dark:text-card-foreground mb-1"
                 >
                   Email
                 </label>
@@ -147,7 +151,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             <div>
               <label
                 htmlFor="message"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-card-foreground mb-1"
               >
                 Message
               </label>
@@ -162,7 +166,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
             <button
               type="submit"
-              className="px-6 py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors disabled:opacity-50"
+              className="flex items-center border border-transparent transition-colors bg-secondary text-white hover:text-secondary rounded-md hover:bg-accent dark:hover:bg-secondary-300 font-medium h-10 sm:h-12 px-4 sm:px-8 sm:w-auto cursor-pointer"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Sending..." : submitButtonText}
