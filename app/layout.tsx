@@ -21,11 +21,27 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Line Drive Tax",
   description:
-    "Full service tax for professional athletes and business professionals",
+    "Full service tax for professional athletes and business professionals.",
+  metadataBase: new URL("https://www.linedrivetax.com"),
   openGraph: {
-    images: "/og-image.png",
+    title: "Line Drive Tax",
+    description:
+      "Full service tax for professional athletes and business professionals.",
+    url: "https://www.linedrivetax.com",
+    siteName: "Line Drive Tax",
+    images: [
+      {
+        url: "/og-ldt.png",
+        width: 1201,
+        height: 631,
+        alt: "Line Drive Tax",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
   },
 };
+
 
 export default function RootLayout({
   children,
