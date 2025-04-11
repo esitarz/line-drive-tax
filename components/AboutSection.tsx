@@ -40,11 +40,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
         <div className="flex flex-col md:flex-row gap-8 items-center justify-start">
           <div className="flex flex-col gap-8 max-w-2xl flex-1">
             <div>
-              <h3 className="text-3xl font-semibold mb-4">{heading1}</h3>
+              <h3 className="text-2xl text-muted-foreground font-semibold mb-4">
+                {heading1}
+              </h3>
               <p className="prose dark:prose-invert max-w-none">{paragraph1}</p>
             </div>
             <div>
-              <h3 className="text-2xl font-semibold mb-4">{heading2}</h3>
+              <h3 className="text-2xl text-muted-foreground font-semibold mb-4">
+                {heading2}
+              </h3>
               <p className="prose dark:prose-invert max-w-none">{paragraph2}</p>
             </div>
           </div>

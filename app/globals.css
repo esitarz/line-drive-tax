@@ -204,3 +204,19 @@
     font-family: var(--font-grotesk);
   }
 }
+
+#background-blobs{
+      position: relative;
+      overflow: hidden;    
+  }
+  #background-blobs:before,
+  #background-blobs:after{
+      position:absolute;
+      z-index: -1;
+      content: "";
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      pointer-events: none;
+  }

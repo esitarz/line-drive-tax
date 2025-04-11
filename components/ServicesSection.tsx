@@ -43,7 +43,7 @@ export const ServicesSection = ({
               key={index}
               className="bg-card text-card-foreground p-6 rounded-md shadow-md"
             >
-              <h3 className="text-gray text-xl font-semibold mb-2">
+              <h3 className="text-secondary dark:text-muted-foreground text-xl font-semibold mb-2">
                 {service.title}
               </h3>
               <p>{service.description}</p>
