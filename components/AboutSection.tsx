@@ -54,7 +54,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           </div>
           <div className="flex-1 flex justify-center">
             {/* <div className="w-64 h-64 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center"> */}
-            <img src="/kdahl@2x.png" alt={"alt"} />
+            <img src="/kdahl-2025.png" alt="kelly dahl" />
             {/* </div> */}
           </div>
         </div>
