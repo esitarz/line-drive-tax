@@ -29,7 +29,6 @@ export const ServicesSection = ({
   return (
     <section
       ref={ref}
-      id="services"
       className="flex flex-col items-center justify-center p-8 min-h-screen"
     >
       <div className="container mx-auto mt-25 sm:mt-0">

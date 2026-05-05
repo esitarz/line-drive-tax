@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Button } from "@/shadcn/ui/button";
 import ThemeToggle from "./ThemeToggle";
 
@@ -10,8 +11,8 @@ export default function TopMenu() {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full flex justify-between items-center px-6 py-4 z-500 bg-transparent">
-      <img src="/ldt.svg" alt={"alt"} width="100" height="100" />
+    <div className="fixed top-0 left-0 z-50 flex w-full items-center justify-between bg-transparent px-6 py-4">
+      <Image src="/ldt.svg" alt="Line Drive Tax" width={153} height={48} priority />
       <div className="flex gap-4">
         <ThemeToggle />
         <Button

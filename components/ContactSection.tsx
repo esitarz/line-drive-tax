@@ -30,12 +30,17 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitState, setSubmitState] = useState<{
+    tone: "success" | "error";
+    message: string;
+  } | null>(null);
 
   const ref = useSectionInView(onVisible);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsSubmitting(true);
+    setSubmitState(null);
 
     const formData = {
       name,
@@ -52,6 +57,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
       if (response.ok) {
         toast.success("Your message has been sent!");
+        setSubmitState({
+          tone: "success",
+          message: "Thanks. Your message has been sent successfully.",
+        });
         setName("");
         setEmail("");
         setMessage("");
@@ -59,10 +68,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         const errorData = await response.json();
         console.error("Form error:", errorData);
         toast.error("Something went wrong. Please try again.");
+        setSubmitState({
+          tone: "error",
+          message: "We could not send your message. Please try again.",
+        });
       }
     } catch (error) {
       console.error("Form error:", error);
       toast.error("Something went wrong. Please try again.");
+      setSubmitState({
+        tone: "error",
+        message: "We could not send your message. Please try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -71,7 +88,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   return (
     <section
       ref={ref}
-      id="contact"
       className="min-h-screen flex flex-col items-center justify-center p-8"
     >
       <motion.div
@@ -113,7 +129,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         <div className="bg-white dark:bg-card p-8 rounded-lg shadow-md">
           <div className="prose dark:prose-invert max-w-none mb-6"></div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6" aria-busy={isSubmitting}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label
@@ -127,6 +143,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  disabled={isSubmitting}
                   required
                 />
               </div>
@@ -143,6 +160,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  disabled={isSubmitting}
                   required
                 />
               </div>
@@ -160,16 +178,38 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 rows={4}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                disabled={isSubmitting}
                 required
               />
             </div>
 
+            {submitState ? (
+              <p
+                className={`text-sm ${
+                  submitState.tone === "success"
+                    ? "text-secondary"
+                    : "text-destructive"
+                }`}
+                role="status"
+                aria-live="polite"
+              >
+                {submitState.message}
+              </p>
+            ) : null}
+
             <button
               type="submit"
-              className="flex items-center border border-transparent transition-colors bg-secondary text-white hover:text-secondary rounded-md hover:bg-accent dark:hover:bg-secondary-300 font-medium h-10 sm:h-12 px-4 sm:px-8 sm:w-auto cursor-pointer"
+              className="flex h-10 items-center gap-2 rounded-md border border-transparent bg-secondary px-4 font-medium text-white transition-colors hover:bg-accent hover:text-secondary disabled:cursor-not-allowed disabled:opacity-70 sm:h-12 sm:w-auto sm:px-8 dark:hover:bg-secondary-300"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Sending..." : submitButtonText}
+              {isSubmitting ? (
+                <>
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+                  Sending...
+                </>
+              ) : (
+                submitButtonText
+              )}
             </button>
           </form>
         </div>

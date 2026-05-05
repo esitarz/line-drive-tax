@@ -4,6 +4,7 @@ import abb from "@/lib/animatedBlob";
 import { useSectionInView } from "@/lib/useSectionInView";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { useTheme } from "next-themes";
 
 export interface HomeSectionFrontmatter {
   title: string;
@@ -20,12 +21,17 @@ interface HomeSectionProps {
 
 export const HomeSection = ({ frontmatter, onVisible }: HomeSectionProps) => {
   const sectionRef = useSectionInView(onVisible);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
+    if (!resolvedTheme) {
+      return;
+    }
+
     const getCSSVar = (name: string) =>
       getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
-    const isDark = document.documentElement.classList.contains("dark");
+    const isDark = resolvedTheme === "dark";
 
     const colors = isDark
       ? [
@@ -43,9 +49,9 @@ export const HomeSection = ({ frontmatter, onVisible }: HomeSectionProps) => {
           getCSSVar("--gray-100"),
         ];
 
-    abb({
+    return abb({
       element: "#home-background-blobs",
-      background: getCSSVar("--background"), // optional: dynamic bg too
+      background: getCSSVar("--background"),
       colors,
       speed: 0.75,
       opacity: 0.2,
@@ -56,20 +62,19 @@ export const HomeSection = ({ frontmatter, onVisible }: HomeSectionProps) => {
         blur: 3,
       },
     });
-  }, []);
+  }, [resolvedTheme]);
 
   return (
     <section
-      id="home"
       ref={sectionRef}
-      className="relative flex min-h-screen snap-start flex-col items-center justify-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20"
+      className="relative flex min-h-screen snap-start flex-col items-center justify-center gap-16 p-8 pb-20 font-(family-name:--font-geist-sans) sm:p-20"
     >
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: false }}
-        className="flex max-w-6xl flex-col items-center gap-[32px] sm:items-start"
+        className="flex max-w-6xl flex-col items-center gap-8 sm:items-start"
       >
         <h1 className="text-7xl font-semibold">{frontmatter.title}</h1>
         <h2 className="tagline-gradient max-w-2xl text-center text-4xl font-thin sm:text-left">
@@ -80,7 +85,7 @@ export const HomeSection = ({ frontmatter, onVisible }: HomeSectionProps) => {
         </p>
         <div className="flex flex-col items-center gap-4 sm:flex-row">
           <a
-            className="text-primary border-primary-500 hover:bg-primary dark:hover:bg-secondary-300 flex h-10 items-center rounded-sm border-1 px-4 text-lg font-medium transition-colors hover:text-white sm:h-12 sm:w-auto sm:px-8 dark:hover:text-white"
+            className="text-primary border-primary-500 hover:bg-primary dark:hover:bg-secondary-300 flex h-10 items-center rounded-sm border px-4 text-lg font-medium transition-colors hover:text-white sm:h-12 sm:w-auto sm:px-8 dark:hover:text-white"
             href="#contact"
             onClick={(e) => {
               e.preventDefault();
@@ -94,7 +99,7 @@ export const HomeSection = ({ frontmatter, onVisible }: HomeSectionProps) => {
           </a>
           {frontmatter.secondaryButtonText && (
             <a
-              className="flex h-10 w-full items-center border border-black/[.08] px-4 text-sm font-medium transition-colors hover:border-transparent hover:bg-[#f2f2f2] sm:h-12 sm:w-auto sm:px-5 sm:text-base dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
+              className="flex h-10 w-full items-center border border-black/8 px-4 text-sm font-medium transition-colors hover:border-transparent hover:bg-[#f2f2f2] sm:h-12 sm:w-auto sm:px-5 sm:text-base dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
               href="#services"
               onClick={(e) => {
                 e.preventDefault();

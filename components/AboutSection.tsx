@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useSectionInView } from "@/lib/useSectionInView";
 import { motion } from "framer-motion";
 
@@ -24,7 +25,6 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
   return (
     <section
       ref={ref}
-      id="about"
       className="flex flex-col items-center justify-center p-8 min-h-screen"
     >
       <motion.div
@@ -34,9 +34,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
         viewport={{ once: false }}
         className="max-w-4xl mt-25 sm:mt-0"
       >
-        {title !== "" ? null : (
+        {title ? (
           <h1 className="text-5xl font-bold mb-4">{title}</h1>
-        )}
+        ) : null}
         <div className="flex flex-col md:flex-row gap-8 items-center justify-start">
           <div className="flex flex-col gap-8 max-w-2xl flex-1">
             <div>
@@ -53,9 +53,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             </div>
           </div>
           <div className="flex-1 flex justify-center">
-            {/* <div className="w-64 h-64 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center"> */}
-            <img src="/kdahl@2x.png" alt={"alt"} />
-            {/* </div> */}
+            <Image
+              src="/kdahl@2x.png"
+              alt="Kelly Dahl"
+              width={6751}
+              height={5936}
+              className="h-auto w-full max-w-sm rounded-2xl object-cover shadow-lg"
+              sizes="(min-width: 768px) 24rem, 70vw"
+              priority={false}
+            />
           </div>
         </div>
       </motion.div>

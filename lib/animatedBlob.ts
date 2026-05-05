@@ -6,7 +6,10 @@ type Point = {
   color: string;
 };
 
-type ABBStore = Record<string, number>;
+type ABBStore = {
+  frames: Record<string, number>;
+  sheets: Record<string, CSSStyleSheet>;
+};
 
 interface ABB {
   (options: {
@@ -23,9 +26,19 @@ interface ABB {
       opacity?: number;
       blur?: number;
     };
-  }): void;
+  }): () => void;
   store?: ABBStore;
 }
+
+const removeSheet = (stylesheet?: CSSStyleSheet) => {
+  if (!stylesheet) {
+    return;
+  }
+
+  document.adoptedStyleSheets = document.adoptedStyleSheets.filter(
+    (sheet) => sheet !== stylesheet
+  );
+};
 
 const updateStyle = (points: Point[]) =>
   points
@@ -101,10 +114,23 @@ const abb: ABB = ({
     blur?: number;
   };
 }) => {
-  if (!element) return;
+  if (!element) return () => {};
+
+  const store =
+    (abb.store ||= {
+      frames: {},
+      sheets: {},
+    });
+
+  if (store.frames[element]) {
+    cancelAnimationFrame(store.frames[element]);
+  }
+
+  removeSheet(store.sheets[element]);
 
   const stylesheet = new CSSStyleSheet();
   document.adoptedStyleSheets = [...document.adoptedStyleSheets, stylesheet];
+  store.sheets[element] = stylesheet;
 
   let points: Point[] = colors.map((color) => ({
     x: Math.random() * 100,
@@ -118,14 +144,8 @@ const abb: ABB = ({
   const interval = 1000 / fps;
   let then: number | undefined;
 
-  const store = (abb.store ||= {});
-
-  if (store[element]) {
-    cancelAnimationFrame(store[element]);
-  }
-
   function animate(timestamp: number) {
-    store[element] = requestAnimationFrame(animate);
+    store.frames[element] = requestAnimationFrame(animate);
     then ??= timestamp;
     const delta = timestamp - then;
     if (delta > interval) {
@@ -157,7 +177,17 @@ const abb: ABB = ({
     }
   }
 
-  requestAnimationFrame(animate);
+  store.frames[element] = requestAnimationFrame(animate);
+
+  return () => {
+    if (store.frames[element]) {
+      cancelAnimationFrame(store.frames[element]);
+      delete store.frames[element];
+    }
+
+    removeSheet(store.sheets[element]);
+    delete store.sheets[element];
+  };
 };
 
 export default abb;
